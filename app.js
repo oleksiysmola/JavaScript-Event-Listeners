@@ -82,12 +82,21 @@ handleButtonClick = function () {
 darkModeButton.addEventListener("click", handleButtonClick);
 
 favouriteButtons = document.getElementsByClassName("favourite-button");
-
+let highlightedPosts = [];
+for (i = 0; i < favouriteButtons.length; i++){
+    highlightedPosts.push(false);
+}
 for (i = 0; i < favouriteButtons.length; i++){
     let favouriteButton = favouriteButtons[i];
     let handleFavouriteButtonClick = function() {
         let postToFavourite = favouriteButton.parentElement;
-        postToFavourite.style.backgroundColor = "yellow";
+        if (highlightedPosts[i] === false){    
+            postToFavourite.style.backgroundColor = "yellow";
+            highlightedPosts[i] = true;
+        } else {
+            postToFavourite.style.backgroundColor = defaultBackground;
+            highlightedPosts[i] = false;
+        }
         // favouriteButton.parentElement.style.backgroundColor = "yellow";
     }
     favouriteButton.addEventListener("click", handleFavouriteButtonClick);
