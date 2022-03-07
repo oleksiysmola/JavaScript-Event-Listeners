@@ -81,23 +81,63 @@ handleButtonClick = function () {
 
 darkModeButton.addEventListener("click", handleButtonClick);
 
-favouriteButtons = document.getElementsByClassName("favourite-button");
-let highlightedPosts = [];
-for (i = 0; i < favouriteButtons.length; i++){
+const setListenersForFavouriteButtons = function(){
+    favouriteButtons = document.getElementsByClassName("favourite-button");
+    let highlightedPosts = [];
+    for (i = 0; i < favouriteButtons.length; i++){
     highlightedPosts.push(false);
-}
-for (i = 0; i < favouriteButtons.length; i++){
-    let favouriteButton = favouriteButtons[i];
-    let handleFavouriteButtonClick = function() {
-        let postToFavourite = favouriteButton.parentElement;
-        if (highlightedPosts[i] === false){    
-            postToFavourite.style.backgroundColor = "yellow";
-            highlightedPosts[i] = true;
-        } else {
-            postToFavourite.style.backgroundColor = defaultBackground;
-            highlightedPosts[i] = false;
-        }
-        // favouriteButton.parentElement.style.backgroundColor = "yellow";
     }
+    for (i = 0; i < favouriteButtons.length; i++){
+        let favouriteButton = favouriteButtons[i];
+        let handleFavouriteButtonClick = function() {
+            let postToFavourite = favouriteButton.parentElement;
+            if (highlightedPosts[i] === false){    
+                postToFavourite.style.backgroundColor = "yellow";
+                highlightedPosts[i] = true;
+            } else {
+                postToFavourite.style.backgroundColor = defaultBackground;
+                highlightedPosts[i] = false;
+            }
+        // favouriteButton.parentElement.style.backgroundColor = "yellow";
+        }
     favouriteButton.addEventListener("click", handleFavouriteButtonClick);
+    }
 }
+
+postButton = document.getElementById("post-submit");
+const allPosts = document.getElementById("post-container");
+const handleSubmitButtonClick = function(){
+    let newPost = document.createElement("section");
+    newPost.className = "post";
+    // Retrieve submission info
+    let title = document.createElement("h3");
+    let titleText = document.querySelector("#title-field").value;
+    console.log(titleText);
+    title.innerText = titleText;
+    let date = document.createElement("h4");
+    let dateText = document.querySelector("#date-field").value;
+    console.log(dateText);
+    date.innerText = "Date: " + dateText;
+    let body = document.createElement("p");
+    let bodyText = document.querySelector("#text-body").value;
+    console.log(bodyText);
+    body.innerText = bodyText;
+    let newFavouriteButton = document.createElement("button");
+    newFavouriteButton.className = "favourite-button";
+    newFavouriteButton.innerText = "Favourite";
+    // Add submission
+    newPost.appendChild(title);
+    newPost.appendChild(date);
+    newPost.appendChild(body);
+    newPost.appendChild(newFavouriteButton);
+    allPosts.appendChild(newPost);
+    // Clear submission area
+    document.getElementById("title-field").value = "";
+    document.getElementById("date-field").value = "";
+    document.getElementById("text-body").value = "";
+    // Ensures new button can be used to highlight favourite post
+    setListenersForFavouriteButtons();
+}
+
+postButton.addEventListener("click", handleSubmitButtonClick);
+
