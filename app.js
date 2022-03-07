@@ -1,27 +1,84 @@
 darkModeButton = document.getElementById("dark-mode-button")
 
-handleButtonClick = function () {
+body = document.body;
+
+const defaultBackground = body.style.backgroundColor;
+const defaultTextColour = body.style.color;
+const defaultBorderColour = document.getElementById("title-section").style.border;
+const headingDefaultColour = document.getElementsByTagName("h3")[0].style.color;
+
+const darkModeBackground = "#091d1e";
+const darkModeTextColour = "#aaaaaa";
+const darkModeBorderColour = "#aaaaaa";
+const headingDarkModeColour = "#466876";
+
+let darkMode = false;
+
+const changeToLightMode = function(){
     console.log("button clicked")
     // change the background colour and text
-    body = document.body
-    body.style.backgroundColor = "#091d1e"
-    body.style.color = "#aaaaaa"
+    body = document.body;
+    body.style.backgroundColor = defaultBackground;
+    body.style.color = defaultTextColour;
 
     // change the border of the title
 
     title = document.getElementById("title-section")
-    title.style.border = "1px solid #aaaaaa"
+    title.style.border = "1px solid " + defaultBorderColour;
 
     // change the border and headings on the posts
 
     posts = document.getElementsByClassName("post")
     for (post of posts){
-        post.style.border = "1px solid #aaaaaa"
+        post.style.border = "1px solid " + defaultBorderColour;
     }
 
     postHeadings = document.getElementsByTagName("h3")
     for (heading of postHeadings){
-        heading.style.color = "#466876"
+        heading.style.color = headingDefaultColour;
+    }
+
+    darkMode = false;
+}
+
+const changeToDarkMode = function(){
+    console.log("button clicked")
+    // change the background colour and text
+    body = document.body;
+    body.style.backgroundColor = darkModeBackground;
+    body.style.color = darkModeTextColour;
+
+    // change the border of the title
+
+    title = document.getElementById("title-section")
+    title.style.border = "1px solid " + darkModeBorderColour;
+
+    // change the border and headings on the posts
+
+    posts = document.getElementsByClassName("post")
+    for (post of posts){
+        post.style.border = "1px solid " + darkModeBorderColour
+    }
+
+    postHeadings = document.getElementsByTagName("h3")
+    for (heading of postHeadings){
+        heading.style.color = headingDarkModeColour;
+    }
+
+    darkMode = true;
+}
+
+handleButtonClick = function () {
+    console.log("button clicked")
+    // change the background colour and text
+    body = document.body;
+    console.log(body.style.backgroundColor === darkModeBackground);
+    console.log(body.style.backgroundColor);
+    console.log(darkModeBackground);
+    if (darkMode){
+        changeToLightMode();
+    } else {
+        changeToDarkMode();
     }
 }
 

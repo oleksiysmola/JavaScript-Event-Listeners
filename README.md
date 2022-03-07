@@ -1,0 +1,1 @@
+A set of practice exercises for JavaScript involving event listeners.
