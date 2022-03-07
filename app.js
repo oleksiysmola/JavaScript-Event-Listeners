@@ -72,9 +72,6 @@ handleButtonClick = function () {
     console.log("button clicked")
     // change the background colour and text
     body = document.body;
-    console.log(body.style.backgroundColor === darkModeBackground);
-    console.log(body.style.backgroundColor);
-    console.log(darkModeBackground);
     if (darkMode){
         changeToLightMode();
     } else {
@@ -82,4 +79,16 @@ handleButtonClick = function () {
     }
 }
 
-darkModeButton.addEventListener("click", handleButtonClick)
+darkModeButton.addEventListener("click", handleButtonClick);
+
+favouriteButtons = document.getElementsByClassName("favourite-button");
+
+for (i = 0; i < favouriteButtons.length; i++){
+    let favouriteButton = favouriteButtons[i];
+    let handleFavouriteButtonClick = function() {
+        let postToFavourite = favouriteButton.parentElement;
+        postToFavourite.style.backgroundColor = "yellow";
+        // favouriteButton.parentElement.style.backgroundColor = "yellow";
+    }
+    favouriteButton.addEventListener("click", handleFavouriteButtonClick);
+}
